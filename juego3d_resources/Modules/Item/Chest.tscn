@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://bd0dnvsjixc4w"]
+
+[ext_resource type="Script" uid="uid://b7lksypmb4ec" path="res://Modules/Item/chest.gd" id="1_vik6b"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_8pac7"]
+
+[node name="Chest" type="StaticBody3D"]
+script = ExtResource("1_vik6b")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_8pac7")

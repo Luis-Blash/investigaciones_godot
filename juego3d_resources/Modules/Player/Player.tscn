@@ -1,0 +1,30 @@
+[gd_scene load_steps=6 format=3 uid="uid://b7qyaopmgn5p4"]
+
+[ext_resource type="Script" uid="uid://bamplxeerwngr" path="res://Modules/Player/player.gd" id="1_po7rg"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_kekpl"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kekpl"]
+albedo_color = Color(0.352941, 1, 1, 1)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_po7rg"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_n8wlw"]
+
+[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("pivotPlayer")]
+script = ExtResource("1_po7rg")
+pivotPlayer = NodePath("PivotPlayer")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_kekpl")
+
+[node name="PivotPlayer" type="Node3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="PivotPlayer"]
+material_override = SubResource("StandardMaterial3D_kekpl")
+mesh = SubResource("CapsuleMesh_po7rg")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="PivotPlayer/MeshInstance3D"]
+transform = Transform3D(0.836181, 0, 0, 0, 0.456809, 0, 0, 0, 0.590616, 0, 0.497636, 0.386097)
+mesh = SubResource("BoxMesh_n8wlw")

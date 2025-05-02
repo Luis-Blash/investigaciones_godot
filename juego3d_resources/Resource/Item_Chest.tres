@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="Item" load_steps=3 format=3 uid="uid://cav51k41ha37d"]
+
+[ext_resource type="Script" uid="uid://disct71ijnv7p" path="res://Resource/Item.gd" id="1_4xndu"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_4xndu"]
+
+[resource]
+script = ExtResource("1_4xndu")
+name = "Chest1"
+type = 0
+mesh = SubResource("BoxMesh_4xndu")
+metadata/_custom_type_script = "uid://disct71ijnv7p"
