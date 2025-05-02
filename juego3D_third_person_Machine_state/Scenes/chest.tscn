@@ -1,0 +1,45 @@
+[gd_scene load_steps=6 format=3 uid="uid://c61fbwfp6x8qs"]
+
+[ext_resource type="Script" uid="uid://c8rptldr8crcb" path="res://Scripts/Items/Chest/chest.gd" id="1_lyb87"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ncd2y"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_lyb87"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_cjfl1"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_lyb87"]
+
+[node name="Chest" type="StaticBody3D"]
+collision_layer = 2
+script = ExtResource("1_lyb87")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_ncd2y")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.538849, 0, 0, 0, 1, 0, -0.256904, 0)
+mesh = SubResource("BoxMesh_lyb87")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.538849, 0, 0, 0, 1, 0, 0.304771, 0)
+mesh = SubResource("BoxMesh_lyb87")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.448711, 0, 0, 0, 0.249947, 0, 0, 0, 0.157317, 0, 0, 0.534704)
+mesh = SubResource("BoxMesh_cjfl1")
+
+[node name="Area3D" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -5.96046e-08, 0.873868)
+collision_layer = 8
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+shape = SubResource("BoxShape3D_lyb87")
+debug_color = Color(0.945134, 4.23551e-06, 0.593869, 0.42)
+
+[node name="Label3D" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.24193, 0.274605)
+text = "Prueba"
+
+[connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]
+[connection signal="body_exited" from="Area3D" to="." method="_on_area_3d_body_exited"]

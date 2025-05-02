@@ -1,0 +1,49 @@
+[gd_scene load_steps=10 format=3 uid="uid://c1uhpnu6o7chy"]
+
+[ext_resource type="Script" uid="uid://bsnqpgvie60lp" path="res://Scripts/Player/Player.gd" id="1_v0iea"]
+[ext_resource type="Script" uid="uid://cu8t05pmkcfdc" path="res://Scripts/Player/Idle.gd" id="2_6t5aa"]
+[ext_resource type="Script" uid="uid://be5nw4jujfqt6" path="res://Scripts/Player/Machine_Character.gd" id="2_cvnsp"]
+[ext_resource type="Script" uid="uid://dcyaiv1bdkico" path="res://Scripts/Player/Base.gd" id="3_vgqql"]
+[ext_resource type="Script" uid="uid://dkoy7m0386k51" path="res://Scripts/Player/Moving.gd" id="5_fkybt"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_acmnh"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_3eola"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_0bb2n"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_v0iea"]
+
+[node name="Player" type="CharacterBody3D"]
+script = ExtResource("1_v0iea")
+
+[node name="body3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+mesh = SubResource("CapsuleMesh_acmnh")
+
+[node name="head" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.670276, 0, 0, 0, 0.349602, 0, 0, 0, 0.428679, 0.001, 1.5, 0.415)
+mesh = SubResource("BoxMesh_3eola")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_0bb2n")
+
+[node name="SpringArm3D" type="SpringArm3D" parent="."]
+transform = Transform3D(-1, 0, -8.74228e-08, -3.11856e-08, 0.934211, 0.356722, 8.16713e-08, 0.356722, -0.934211, 0, 2.65459, -2.7009)
+collision_mask = 2
+shape = SubResource("SphereShape3D_v0iea")
+
+[node name="Camera3D" type="Camera3D" parent="SpringArm3D"]
+
+[node name="Machine_Character" type="Node" parent="."]
+script = ExtResource("2_cvnsp")
+
+[node name="Base" type="Node" parent="Machine_Character"]
+script = ExtResource("3_vgqql")
+
+[node name="Idle" type="Node" parent="Machine_Character"]
+script = ExtResource("2_6t5aa")
+
+[node name="Moving" type="Node" parent="Machine_Character"]
+script = ExtResource("5_fkybt")

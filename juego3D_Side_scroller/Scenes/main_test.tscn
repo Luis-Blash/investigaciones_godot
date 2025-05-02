@@ -1,0 +1,114 @@
+[gd_scene load_steps=10 format=3 uid="uid://w0axcmr4783r"]
+
+[ext_resource type="Script" uid="uid://m7othnnuqxj6" path="res://Scripts/camera.gd" id="1_g4g7g"]
+[ext_resource type="PackedScene" uid="uid://cmso0d6onadi2" path="res://Modules/Player/Player.tscn" id="1_vp2v7"]
+[ext_resource type="PackedScene" uid="uid://c5vijg0yj3irg" path="res://Modules/Machinery/Monitor/Monitor.tscn" id="2_nb675"]
+[ext_resource type="PackedScene" uid="uid://djpyhl37d3dhc" path="res://Modules/Machinery/Platform/PlatformTest.tscn" id="3_18lj0"]
+[ext_resource type="PackedScene" uid="uid://csckgrxtnjtij" path="res://Modules/Machinery/DoorSlidingDouble/doorSlidingDouble.tscn" id="4_26jq3"]
+[ext_resource type="PackedScene" uid="uid://boc6wwi2r112c" path="res://Modules/Machinery/ButtonFloor/buttonFloor.tscn" id="5_087m6"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ibo2q"]
+sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+ground_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+
+[sub_resource type="Sky" id="Sky_dega7"]
+sky_material = SubResource("ProceduralSkyMaterial_ibo2q")
+
+[sub_resource type="Environment" id="Environment_halag"]
+background_mode = 2
+sky = SubResource("Sky_dega7")
+tonemap_mode = 2
+glow_enabled = true
+
+[node name="mainTest" type="Node3D"]
+
+[node name="WorldEnvironmentTest" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_halag")
+
+[node name="Sol" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.433659, -0.866171, 0.248371, 0, 0.275637, 0.961262, -0.901077, 0.41686, -0.119533, -0.69692, 7.548, -1.21358)
+light_energy = 3.45
+shadow_enabled = true
+
+[node name="Camera" type="Node3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 8.90154, 1.15937, -1.86374)
+script = ExtResource("1_g4g7g")
+
+[node name="Camera3D" type="Camera3D" parent="Camera"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.0592, 0)
+
+[node name="MapTest" type="Node3D" parent="."]
+
+[node name="floors" type="CSGCombiner3D" parent="MapTest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0352385, -2.2208, -1.6764)
+use_collision = true
+collision_layer = 4
+collision_mask = 0
+
+[node name="CSGBox3D" type="CSGBox3D" parent="MapTest/floors"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2.20112)
+size = Vector3(1, 1, 52.9562)
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="MapTest/floors"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.40857, -13.4213)
+size = Vector3(1, 1.90332, 14.2778)
+
+[node name="CSGBox3D6" type="CSGBox3D" parent="MapTest/floors"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6.59542, -17.1348)
+size = Vector3(1, 1.90332, 21.905)
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="MapTest/floors"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.682373, -4.01002)
+size = Vector3(1, 2.36475, 4.8263)
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="MapTest/floors"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.53601, 14.8721)
+size = Vector3(1, 4.07202, 16.0142)
+
+[node name="CSGBox3D5" type="CSGBox3D" parent="MapTest/floors"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 8.41482, 11.1559)
+size = Vector3(1, 2.28979, 8.58182)
+
+[node name="CSGBox3D9" type="CSGBox3D" parent="MapTest/floors"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7.84065, 16.6061)
+size = Vector3(1, 1.14145, 2.55454)
+
+[node name="CSGBox3D8" type="CSGBox3D" parent="MapTest/floors"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.60192, 21.2852)
+size = Vector3(1, 2.89429, 3.80214)
+
+[node name="CSGBox3D7" type="CSGBox3D" parent="MapTest/floors"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 8.83984, 0.594847)
+size = Vector3(1, 3.14734, 14.5871)
+
+[node name="wall" type="CSGCombiner3D" parent="MapTest"]
+use_collision = true
+collision_layer = 2
+collision_mask = 0
+
+[node name="CSGBox3D" type="CSGBox3D" parent="MapTest/wall"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9.75064, 21.8991)
+size = Vector3(1, 23.0873, 1.36722)
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="MapTest/wall"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 8.43225, -30.0811)
+size = Vector3(1, 22.0106, 1.36722)
+
+[node name="Monitor" parent="." instance=ExtResource("2_nb675")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -0.913083, -1.26802, -1.86164)
+monitorToEmit = "monitor1"
+
+[node name="PlatformTest" parent="." instance=ExtResource("3_18lj0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.72848, 4.4909)
+platformToTarget = "monitor1"
+
+[node name="DoorSlidingDouble" parent="." instance=ExtResource("4_26jq3")]
+transform = Transform3D(-1.31134e-07, 0, -3, 0, 3, 0, 3, 0, -1.31134e-07, 0, 0.133575, -14.1402)
+doorToTarget = "door1"
+
+[node name="ButtonFloor" parent="." instance=ExtResource("5_087m6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0701752, 0.14302, -18.0054)
+stepToTarget = "door1"
+
+[node name="Player" parent="." instance=ExtResource("1_vp2v7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.30069, -25.9252)

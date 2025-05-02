@@ -1,0 +1,51 @@
+[gd_scene load_steps=7 format=3 uid="uid://c5vijg0yj3irg"]
+
+[ext_resource type="Script" uid="uid://5k22vinhtg50" path="res://Modules/Machinery/Monitor/monitor.gd" id="1_7rwnp"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_rua1s"]
+size = Vector3(2.15143, 1.49731, 1.41064)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1xapa"]
+albedo_color = Color(0.0411671, 0.479006, 0.529832, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_7rwnp"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_fkf5u"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_7rwnp"]
+size = Vector3(2.18335, 1, 1)
+
+[node name="Monitor" type="StaticBody3D"]
+collision_layer = 128
+script = ExtResource("1_7rwnp")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0062561, 0.366089, -0.205322)
+shape = SubResource("BoxShape3D_rua1s")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(2.23885, 0, 0, 0, 1.5236, 0, 0, 0, 0.743599, 0, 0.341018, -0.541889)
+material_override = SubResource("StandardMaterial3D_1xapa")
+mesh = SubResource("BoxMesh_7rwnp")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(2.19969, 0, 0, 0, 0.553734, 0, 0, 0, 0.70992, 0, -0.136004, 0.14526)
+material_override = SubResource("StandardMaterial3D_1xapa")
+mesh = SubResource("BoxMesh_fkf5u")
+skeleton = NodePath("../MeshInstance3D")
+
+[node name="Label3D" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.87365, 0)
+font_size = 70
+
+[node name="MachineArea" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.01452)
+collision_layer = 256
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MachineArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00915527, 0, 0)
+shape = SubResource("BoxShape3D_7rwnp")
+debug_color = Color(0.94824, 0.228962, 0, 0.42)
+
+[connection signal="body_entered" from="MachineArea" to="." method="_on_machine_area_body_entered"]
+[connection signal="body_exited" from="MachineArea" to="." method="_on_machine_area_body_exited"]

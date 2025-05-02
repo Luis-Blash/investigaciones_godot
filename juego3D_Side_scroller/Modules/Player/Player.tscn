@@ -1,0 +1,33 @@
+[gd_scene load_steps=6 format=3 uid="uid://cmso0d6onadi2"]
+
+[ext_resource type="Script" uid="uid://dd6ngi0ujlob" path="res://Modules/Player/player.gd" id="1_po7rg"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_kekpl"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kekpl"]
+albedo_color = Color(0, 0.46492, 0.532117, 1)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_kekpl"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_po7rg"]
+
+[node name="Player" type="CharacterBody3D" groups=["Player"]]
+collision_mask = 158
+script = ExtResource("1_po7rg")
+ROTATION_SPEED = 7.0
+
+[node name="CollisionPlayer" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.975129, 0)
+shape = SubResource("CapsuleShape3D_kekpl")
+
+[node name="PivotPlayer" type="Node3D" parent="."]
+
+[node name="CuerpoTest" type="MeshInstance3D" parent="PivotPlayer"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.994458, 0)
+material_override = SubResource("StandardMaterial3D_kekpl")
+mesh = SubResource("CapsuleMesh_kekpl")
+skeleton = NodePath("../..")
+
+[node name="HeadTest" type="MeshInstance3D" parent="PivotPlayer/CuerpoTest"]
+transform = Transform3D(0.59086, 0, 0, 0, 0.224802, 0, 0, 0, 0.463229, 0.0526571, 0.392113, 0.37913)
+mesh = SubResource("BoxMesh_po7rg")

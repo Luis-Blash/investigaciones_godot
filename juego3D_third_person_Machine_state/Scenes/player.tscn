@@ -1,0 +1,84 @@
+[gd_scene load_steps=14 format=3 uid="uid://c1uhpnu6o7chy"]
+
+[ext_resource type="Script" uid="uid://bsnqpgvie60lp" path="res://Scripts/Player/Player.gd" id="1_v0iea"]
+[ext_resource type="Script" uid="uid://cu8t05pmkcfdc" path="res://Scripts/Player/Idle.gd" id="2_6t5aa"]
+[ext_resource type="Script" uid="uid://be5nw4jujfqt6" path="res://Scripts/Player/Machine_Character.gd" id="2_cvnsp"]
+[ext_resource type="Script" uid="uid://dcyaiv1bdkico" path="res://Scripts/Player/Base.gd" id="3_vgqql"]
+[ext_resource type="Script" uid="uid://cq45t2c7xaqry" path="res://Scripts/Player/LogicGeneral.gd" id="4_3smsa"]
+[ext_resource type="Script" uid="uid://dkoy7m0386k51" path="res://Scripts/Player/Moving.gd" id="5_fkybt"]
+[ext_resource type="Script" uid="uid://ce0vmvsmqwthf" path="res://Scripts/Player/Jumping.gd" id="6_x3wgy"]
+[ext_resource type="Script" uid="uid://dc5uin1nwlxv8" path="res://Scripts/Player/Atack.gd" id="8_8erm5"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_3eola"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_acmnh"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_0bb2n"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_8erm5"]
+size = Vector3(1.82153, 1.61243, 1.74561)
+
+[sub_resource type="BoxMesh" id="BoxMesh_8erm5"]
+
+[node name="Player" type="CharacterBody3D"]
+collision_mask = 26
+script = ExtResource("1_v0iea")
+speed = 7.762
+
+[node name="head" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.670276, 0, 0, 0, 0.349602, 0, 0, 0, 0.428679, 0.001, 1.5, -0.377537)
+mesh = SubResource("BoxMesh_3eola")
+
+[node name="body3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+mesh = SubResource("CapsuleMesh_acmnh")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_0bb2n")
+
+[node name="AreaAtackPlayer" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.275766, 1.00008, -1.10787)
+collision_layer = 32
+collision_mask = 16
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="AreaAtackPlayer"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.410767, 0.306213, -0.108643)
+shape = SubResource("BoxShape3D_8erm5")
+debug_color = Color(0.997089, 0, 0.1735, 0.42)
+
+[node name="Atack" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.275766, 1.00008, -0.201724)
+visible = false
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Atack"]
+transform = Transform3D(0.365313, 0, 0, 0, 0.194176, 0, 0, 0, 1.88045, 0, 0, -0.941845)
+mesh = SubResource("BoxMesh_8erm5")
+
+[node name="Machine_Character" type="Node" parent="." node_paths=PackedStringArray("default_state")]
+script = ExtResource("2_cvnsp")
+default_state = NodePath("IdlePlayer")
+
+[node name="Base" type="Node" parent="Machine_Character"]
+script = ExtResource("3_vgqql")
+
+[node name="LogicGeneral" type="Node" parent="Machine_Character"]
+script = ExtResource("4_3smsa")
+
+[node name="IdlePlayer" type="Node" parent="Machine_Character"]
+script = ExtResource("2_6t5aa")
+
+[node name="MovingPlayer" type="Node" parent="Machine_Character"]
+script = ExtResource("5_fkybt")
+
+[node name="JumpingPlayer" type="Node" parent="Machine_Character"]
+script = ExtResource("6_x3wgy")
+
+[node name="AtackPlayer" type="Node" parent="Machine_Character"]
+script = ExtResource("8_8erm5")
+speed_animation = 1.8
+
+[node name="LookAt" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.12288, 0)
+
+[connection signal="body_entered" from="AreaAtackPlayer" to="." method="_on_area_3d_body_entered"]

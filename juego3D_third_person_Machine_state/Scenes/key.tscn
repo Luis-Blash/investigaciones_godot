@@ -1,0 +1,26 @@
+[gd_scene load_steps=4 format=3 uid="uid://crhwftsghvgrs"]
+
+[ext_resource type="Script" uid="uid://3k8qde5gihhk" path="res://Scripts/Items/Key.gd" id="1_ut0wq"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_hla8l"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ut0wq"]
+
+[node name="Key" type="Node3D"]
+script = ExtResource("1_ut0wq")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.368263, 0, 0, 0, 0.262602, 0, 0, 0, 1, 0, 0, 0)
+mesh = SubResource("BoxMesh_hla8l")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.703327, 0, 0, 0, 0.262602, 0, 0, 0, 0.324232, 0, 0, -0.408355)
+mesh = SubResource("BoxMesh_hla8l")
+
+[node name="Area3D" type="Area3D" parent="."]
+collision_layer = 8
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+shape = SubResource("BoxShape3D_ut0wq")
+
+[connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]

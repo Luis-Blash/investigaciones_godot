@@ -1,0 +1,33 @@
+[gd_scene load_steps=6 format=3 uid="uid://bsex83av1r1fv"]
+
+[ext_resource type="Script" uid="uid://djoha5vwt52w4" path="res://Modules/Enemy/EnemyTest/enemy_test.gd" id="1_7bt03"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_542e7"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_542e7"]
+albedo_color = Color(0.699336, 0.161551, 0.249591, 1)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_7bt03"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_2i6dh"]
+
+[node name="EnemyTest" type="CharacterBody3D"]
+collision_layer = 16
+collision_mask = 6
+script = ExtResource("1_7bt03")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.968888, 0)
+shape = SubResource("CapsuleShape3D_542e7")
+
+[node name="PivotEnemy" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.00048, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="PivotEnemy"]
+material_override = SubResource("StandardMaterial3D_542e7")
+mesh = SubResource("CapsuleMesh_7bt03")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="PivotEnemy/MeshInstance3D"]
+transform = Transform3D(1, 0, 0, 0, 0.34129, 0, 0, 0, 0.624811, 0, 0.463381, 0.37913)
+mesh = SubResource("BoxMesh_2i6dh")
