@@ -10,7 +10,7 @@ config_version=5
 
 [application]
 
-config/name="SoulsTest"
+config/name="juego3D_third_person_Machine_state"
 run/main_scene="uid://b0pkmkxwe043h"
 config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://icon.svg"
